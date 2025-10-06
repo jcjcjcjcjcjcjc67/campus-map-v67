@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>G1 IRIJAH</title>
+  <link rel="stylesheet" href="floor3.css">
+</head>
+<body>
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <img src="images/loalogo.png">
+    Campus Map Prototype | Floor 3
+  </div>
+
+  <!-- Sidebar -->
+  <div id="right-sidebar" class="right-sidebar">
+    <button class="close-btn" onclick="toggleSidebar()">×</button>
+    <h2>Campus Map</h2>
+
+    <input type="text" id="searchInput" placeholder="Search..." />
+    <hr>
+
+    <div class="dropdown">
+      <button id="floorsBtn" class="dropbtn">Floors</button>
+      <div id="floorsDropdown" class="dropdown-content">
+        <a href="floor1.html">Floor 1</a>
+        <a href="floor2.html">Floor 2</a>
+        <a href="floor3.html">Floor 3</a>
+        <a href="floor4.html">Floor 4</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button id="legendsBtn" class="dropbtn">Legends</button>
+      <div id="legendsDropdown" class="dropdown-content">
+        <a href="#">PDIC</a>
+        <a href="#">Main Building</a>
+        <a href="#">SHS Building</a>
+        <a href="#">Gym</a>
+        <a href="#">Canteens</a>
+        <div id="removeHighlightsText">Remove Highlights</div>
+      </div>
+    </div>
+
+    <button id="creditsBtn">Credits</button>
+    <button id="returnBtn" onclick="window.location.href='index.html'">Return to Home Page</button>
+  </div>
+
+  <button class="open-sidebar-btn" onclick="toggleSidebar()">☰</button>
+
+  <div id="creditsPopup" class="popup">
+    <div id="credits-text">Credits go here</div>
+    <button id="closeCreditsBtn">Close</button>
+  </div>
+
+  <script src="floor3.js"></script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campus Map Admin</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #e8f0f3;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ======= TOP BAR ======= */
+    .top-bar {
+      width: 100%;
+      background-color: #19164f;
+      color: white;
+      font-size: 28px;
+      font-weight: bold;
+      padding: 1px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      box-sizing: border-box;
+    }
+
+    .top-left {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .top-bar img {
+      height: 50px;
+      width: auto;
+    }
+
+    .return-link {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: normal;
+    }
+
+    .return-link:hover {
+      text-decoration: underline;
+    }
+
+    /* ======= MAIN CONTENT AREA ======= */
+    .admin-container {
+      flex: 1;
+      margin-top: 100px; /* offset for fixed header */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: #333;
+      font-size: 22px;
+    }
+
+    .admin-box {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      max-width: 600px;
+      width: 90%;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- HEADER BAR -->
+  <div class="top-bar">
+    <div class="top-left">
+      <img src="images/loalogo.png" alt="Logo">
+      Campus Map Prototype | Admin Panel
+    </div>
+    <a href="index.html" class="return-link">Home Portal</a>
+  </div>
+
+  <!-- MAIN ADMIN CONTENT -->
+  <div class="admin-container">
+    <div class="admin-box">
+      <h2>Admin Dashboard</h2>
+      <p>This area is empty for now</p>
+    </div>
+  </div>
+</body>
+</html>

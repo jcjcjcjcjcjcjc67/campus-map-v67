@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campus Map Login</title>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #e8f0f3; 
+      font-family: Arial, sans-serif;
+      position: relative;
+    }
+
+    .top-bar {
+      width: 100%;
+      background-color: #19164f;
+      color: white;
+      font-size: 28px;
+      font-weight: bold;
+      padding: 1px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      box-sizing: border-box;
+    }
+
+    .top-left {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .top-bar img {
+      height: 50px;
+      width: auto;
+    }
+
+    .admin-link {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: normal;
+      cursor: pointer;
+    }
+
+    .admin-link:hover {
+      text-decoration: underline;
+    }
+
+    .login-container {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      width: 450px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      box-sizing: border-box;
+    }
+
+    .login-container h2 {
+      margin-bottom: 5px;
+      color: #333;
+    }
+
+    .login-container input,
+    .login-container button {
+      width: 100%;
+      padding: 10px;
+      margin: 4px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+      box-sizing: border-box;
+    }
+
+    .login-container button {
+      background-color: brown;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .login-container button:hover {
+      background-color: #a0522d;
+    }
+
+    .create-account {
+      color: blue;
+      cursor: pointer;
+      font-size: 14px;
+      text-decoration: underline;
+      margin-top: 8px;
+    }
+
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      display: none;
+      z-index: 2000;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .popup input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    .popup button {
+      padding: 10px 20px;
+      background-color: brown;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .popup button:hover {
+      background-color: #a0522d;
+    }
+
+    .popup-message {
+      color: green;
+      margin-top: 10px;
+    }
+
+    .close-popup {
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .form-separator {
+      margin: 10px 0;
+      border: 0;
+      border-top: 1px solid #ccc;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="top-bar">
+    <div class="top-left">
+      <img src="images/loalogo.png">
+      Campus Map Prototype | Home Page
+    </div>
+    <span class="admin-link" id="adminBtn">Admin Portal</span>
+  </div>
+
+  <div class="login-container">
+    <h2>User Login</h2>
+
+    <form id="loginForm">
+      <input type="text" id="emailInput" placeholder="Email">
+      <input type="password" id="passwordInput" placeholder="Password">
+      <button type="submit">Access</button>
+      <hr class="form-separator">
+    </form>
+
+    <div class="create-account" id="createAccountText">No Account? Create Here</div>
+  </div>
+
+  <!-- Create Account Popup -->
+  <div class="popup" id="createAccountPopup">
+    <button class="close-popup" id="closeCreateAccount">×</button>
+    <h3>Create Account</h3>
+    <input type="text" placeholder="Email (ITM Account)" required>
+    <input type="password" placeholder="Password" required>
+    <button id="submitAccount">Create Account</button>
+    <div class="popup-message" id="accountMessage"></div>
+  </div>
+
+  <!-- Admin Login Popup -->
+  <div class="popup" id="adminLoginPopup">
+    <button class="close-popup" id="closeAdminLogin">×</button>
+    <h3>Admin Login</h3>
+    <input type="text" placeholder="Admin" required>
+    <input type="password" placeholder="Password" required>
+    <button id="accessAdmin">Access Admin Portal</button>
+  </div>
+
+<script>
+  const loginForm = document.getElementById('loginForm');
+  const emailInput = document.getElementById('emailInput');
+  const passwordInput = document.getElementById('passwordInput');
+  const createAccountText = document.getElementById('createAccountText');
+  const createAccountPopup = document.getElementById('createAccountPopup');
+  const submitAccount = document.getElementById('submitAccount');
+  const accountMessage = document.getElementById('accountMessage');
+  const closeCreateAccount = document.getElementById('closeCreateAccount');
+
+  const adminBtn = document.getElementById('adminBtn');
+  const adminLoginPopup = document.getElementById('adminLoginPopup');
+  const closeAdminLogin = document.getElementById('closeAdminLogin');
+  const accessAdmin = document.getElementById('accessAdmin');
+
+  // LIST OF ALLOWED EMAILS
+  const allowedEmails = [
+    "s2959-24@itmlyceumalabang.onmicrosoft.com",
+    "student@gmail.com",
+  ];
+
+  // Normal user login with email validation
+  loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = emailInput.value.trim();
+    const password = passwordInput.value.trim();
+
+    if (!allowedEmails.includes(email)) {
+      alert("Invalid email");
+      return;
+    }
+
+    if (password === "") {
+      alert("Please enter your password.");
+      return;
+    }
+
+    window.location.href = "floor1.html";
+  });
+
+  // Create account popup
+  createAccountText.addEventListener('click', () => {
+    createAccountPopup.style.display = 'block';
+    accountMessage.textContent = '';
+  });
+
+  submitAccount.addEventListener('click', () => {
+    accountMessage.textContent = "Account created, please wait for admin approval.";
+  });
+
+  closeCreateAccount.addEventListener('click', () => {
+    createAccountPopup.style.display = 'none';
+  });
+
+  // Admin popup
+  adminBtn.addEventListener('click', () => {
+    adminLoginPopup.style.display = 'block';
+  });
+
+  closeAdminLogin.addEventListener('click', () => {
+    adminLoginPopup.style.display = 'none';
+  });
+
+  accessAdmin.addEventListener('click', () => {
+    window.location.href = "admin.html";
+  });
+
+  // Close popups by clicking outside
+  window.addEventListener('click', (e) => {
+    if (e.target === createAccountPopup) {
+      createAccountPopup.style.display = 'none';
+    }
+    if (e.target === adminLoginPopup) {
+      adminLoginPopup.style.display = 'none';
+    }
+  });
+</script>
+
+</body>
+</html>
